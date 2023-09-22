@@ -1,11 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
+import 'package:the_tif_eventapp/event_card.dart';
 import 'package:the_tif_eventapp/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:the_tif_eventapp/event_model.dart';
-
 
 //info card => event infomations when navigated by the card
 
@@ -111,6 +111,8 @@ class Event_InfoCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Text("hell0"),
+    );
   }
 }

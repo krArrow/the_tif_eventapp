@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:the_tif_eventapp/event_card.dart';
 import 'package:the_tif_eventapp/event_model.dart';
 
 class SearchEvent extends StatefulWidget {
@@ -24,17 +25,20 @@ class _SearchEventState extends State<SearchEvent> {
         events = AutoGenerate.fromJson(decodedData).content.data;
       });
     });
+    updateEvents(_toSearch.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //yahn app bar me back button - white => black
       appBar: AppBar(
+        leading: Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
         centerTitle: false,
         elevation: 0.0,
-        //ye bg color bhi blue se white kar liyo plz
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
         title: Text(
           "Search",
           style: TextStyle(
@@ -49,6 +53,7 @@ class _SearchEventState extends State<SearchEvent> {
               color: Colors.black,
             ),
             onPressed: () {
+              // Call a function to update the events based on the search query here.
               updateEvents(_toSearch.text);
             },
           ),
@@ -76,13 +81,15 @@ class _SearchEventState extends State<SearchEvent> {
                   child: Icon(Icons.search),
                 ),
               ),
-              //yahn pr type box same nahi hai
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: SizedBox(
                   width: 200,
                   child: TextField(
                     controller: _toSearch,
+                    onChanged: (query) {
+                      updateEvents(query);
+                    },
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey.shade400),
@@ -95,10 +102,6 @@ class _SearchEventState extends State<SearchEvent> {
               ),
             ],
           ),
-          //yahn homePage ka card (in return) me changes kiye show ho rha hai ??? //comment plz
-
-
-          
           Expanded(
             child: EventListView(events),
           ),
@@ -148,65 +151,6 @@ class EventListView extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class EventCard extends StatelessWidget {
-  final Data event;
-
-  // ignore: prefer_const_constructors_in_immutables
-  EventCard(this.event);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      margin: EdgeInsets.all(8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 92,
-              width: 79,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  event.bannerImage,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const SizedBox(width: 20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  event.newDateTime,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Text(
-                  event.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
     );
   }
 }
