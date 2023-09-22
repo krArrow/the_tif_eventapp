@@ -106,21 +106,20 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      //yahn thik karna hain as cards pe navigation chahiye
       elevation: 2.0,
       margin: EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 92,
-            width: 79,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 90,
+              width: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
@@ -129,47 +128,57 @@ class EventCard extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 8),
-          //ye jo info section hain ye evenly distribute nahi ho rha hai CARD me
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                event.newDateTime,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Text(
-                event.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                ),
-              ),
-              Row(
+            const SizedBox(width: 10),
+            Flexible(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(
-                    Icons.location_on_rounded,
-                    size: 15,
-                    color: Colors.grey,
+                  Text(
+                    event.newDateTime,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                  Text(" ${event.venueCity}, ${event.venueCountry}",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.grey,
-                      )),
+                  Text(
+                    event.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2, // Adjust maxLines as needed
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.location_on, size: 15),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Flexible(
+                        child: Text(
+                          "${event.venueName} • ${event.venueCity}, ${event.venueCountry}",
+                          style: TextStyle(
+                            fontSize: 13.0,
+                            color: Colors.grey,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2, // Adjust maxLines as needed
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          )
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

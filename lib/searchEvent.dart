@@ -96,6 +96,9 @@ class _SearchEventState extends State<SearchEvent> {
             ],
           ),
           //yahn homePage ka card (in return) me changes kiye show ho rha hai ??? //comment plz
+
+
+          
           Expanded(
             child: EventListView(events),
           ),
