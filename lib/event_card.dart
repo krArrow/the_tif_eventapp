@@ -10,7 +10,8 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        //do something
+        //do something.
+        Navigator.pushNamed(context, '/eventInfo');
       },
       child: Card(
         elevation: 2.0,
