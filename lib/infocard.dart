@@ -102,8 +102,8 @@ class EventListView extends StatelessWidget {
     );
   }
 }
-//event ka info card banana hai
 
+//event ka info card banana hai
 class Event_InfoCards extends StatelessWidget {
   late Data? event;
 

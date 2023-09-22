@@ -32,9 +32,14 @@ class _SearchEventState extends State<SearchEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.black,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
         ),
         centerTitle: false,
         elevation: 0.0,
@@ -81,20 +86,26 @@ class _SearchEventState extends State<SearchEvent> {
                   child: Icon(Icons.search),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
-                  width: 200,
+              Text(
+                "|",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.blue,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: TextField(
                     controller: _toSearch,
                     onChanged: (query) {
                       updateEvents(query);
                     },
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade400),
-                      ),
-                      fillColor: Colors.grey[300],
+                      border: InputBorder.none, // Remove the border
                       hintText: "Type Event Name",
                     ),
                   ),
